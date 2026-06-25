@@ -33,7 +33,7 @@ export function EventsPage() {
 
             {" — "}
 
-            <span>{event.status}</span>
+            <span>{event.status_label}</span>
           </li>
         ))}
       </ul>

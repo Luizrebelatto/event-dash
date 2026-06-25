@@ -4,26 +4,27 @@ export type Event = {
     id: string;
     name: string;
     date: string;
-    status: EventStatus;
-    guestLimit: number;
-    photosPerGuest: number;
-    createdAt: string;
+    status_id: EventStatus;
+    status_label: string;
+    guests_limit: number;
+    photos_per_guest: number;
+    created_at: string;
 }
 
 export type Guest = {
     id: string;
-    eventId: string;
+    event_id: string;
     name: string;
     email: string;
     status: "invited" | "joined";
-    photosCounr: number;
-    joinedAt?: string;
+    photos_count: number;
+    joined_at?: string;
 }
 
 export type Photo = {
     id: string;
-    eventId: string;
-    guestName: string;
+    event_id: string;
+    guest_name: string;
     url: string;
-    createdAt: string;
+    created_at: string;
 }

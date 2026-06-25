@@ -27,10 +27,10 @@ export function EventDetailPage() {
     <main>
       <h1>{event?.name}</h1>
 
-      <p>Status: {event?.status}</p>
+      <p>Status: {event?.status_label}</p>
       <p>Data: {event?.date}</p>
-      <p>Limit per guest: {event?.guestLimit}</p>
-      <p>Photos per guests: {event?.photosPerGuest}</p>
+      <p>Limit per guest: {event?.guests_limit}</p>
+      <p>Photos per guests: {event?.photos_per_guest}</p>
 
       <div style={{ display: "flex", gap: 16 }}>
         <Link
