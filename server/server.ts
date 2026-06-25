@@ -1,5 +1,6 @@
 import Fastify from "fastify"
 import cors from "@fastify/cors"
+import { createHash } from "node:crypto"
 import "dotenv/config"
 
 import { eventsRoutes } from "./modules/events/events.routes"
@@ -12,6 +13,25 @@ const app = Fastify({
 
 await app.register(cors, {
   origin: true,
+  exposedHeaders: ["ETag"],
+})
+
+app.addHook("onSend", async (request, reply, payload) => {
+  if (request.method !== "GET" || typeof payload !== "string") {
+    return payload
+  }
+
+  const etag = `"${createHash("sha1").update(payload).digest("base64")}"`
+
+  reply.header("ETag", etag)
+  reply.header("Cache-Control", "no-cache")
+
+  if (request.headers["if-none-match"] === etag) {
+    reply.code(304)
+    return ""
+  }
+
+  return payload
 })
 
 await app.register(eventsRoutes)
